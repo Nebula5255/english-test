@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thames İngilizce Seviye Testi</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #eef5fc;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      max-width: 500px;
+      margin: 5vh auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #1a73e8;
+      margin-bottom: 0.5rem;
+    }
+    .emoji {
+      font-size: 2.5rem;
+    }
+    form, .quiz, .result {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .quiz {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+    .question {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    label {
+      font-weight: 600;
+      text-align: left;
+      color: #333;
+    }
+    input {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.9rem;
+      background: #1c87e6;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #155ac1;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      background: #f0f8ff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      color: #333;
+    }
+    .options button:hover {
+      background: #c4daff;
+    }
+    .options button.selected {
+      background: #4caf50;
+      color: white;
+    }
+    .result {
+      display: none;
+      text-align: center;
+      padding-top: 1rem;
+    }
+    .report-card {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #e0f7fa;
+      border-radius: 8px;
+      color: #00796b;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji">✅</div>
+    <h1>Thames İngilizce Seviye Tespit Testi</h1>
+
+    <form id="registerForm">
+      <label for="name">Ad Soyad</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="grade">Sınıf</label>
+      <input type="text" id="grade" name="grade" required>
+
+      <label for="parent">Veli Adı</label>
+      <input type="text" id="parent" name="parent" required>
+
+      <label for="phone">Telefon</label>
+      <input type="text" id="phone" name="phone" required>
+
+      <button type="submit">Teste Başla ➤</button>
+    </form>
+
+    <div class="quiz" id="quiz" style="display:none;">
+      <p class="question" id="questionText"></p>
+      <img id="questionImage" src="" alt="Question Image" style="max-width: 100%; margin-bottom: 1rem;">
+      <div class="options" id="options"></div>
+      <button id="nextBtn" onclick="nextQuestion()" disabled>Sonraki Soru</button>
+    </div>
+
+    <div class="result" id="result">
+      <h2>🎉 Test Tamamlandı</h2>
+      <p id="resultText"></p>
+      <p id="resultLevel"></p>
+      <button onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button>
+    </div>
+
+    <div class="report-card" id="reportCard" style="display:none;">
+      <p><strong>Ad Soyad:</strong> <span id="studentName"></span></p>
+      <p><strong>Sınıf:</strong> <span id="studentGrade"></span></p>
+      <p><strong>Veli Adı:</strong> <span id="studentParent"></span></p>
+      <p><strong>Telefon:</strong> <span id="studentPhone"></span></p>
+      <p><strong>Doğru Sayısı:</strong> <span id="scoreCount"></span></p>
+      <p><strong>Seviye:</strong> <span id="studentLevel"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const quiz = document.getElementById('quiz');
+    const result = document.getElementById('result');
+    const questionText = document.getElementById('questionText');
+    const optionsDiv = document.getElementById('options');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultText = document.getElementById('resultText');
+    const resultLevel = document.getElementById('resultLevel');
+    const reportCard = document.getElementById('reportCard');
+    const studentName = document.getElementById('studentName');
+    const studentGrade = document.getElementById('studentGrade');
+    const studentParent = document.getElementById('studentParent');
+    const studentPhone = document.getElementById('studentPhone');
+    const scoreCount = document.getElementById('scoreCount');
+    const studentLevel = document.getElementById('studentLevel');
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questions = [
+      { q: "What’s your name?", options: ["I’m fine.", "I’m 10.", "My name is Emily.", "I live in a house."], answer: 2, img: "img/q1.jpg" },
+      { q: "How old are you?", options: ["I am in the kitchen.", "I am twelve years old.", "I like football.", "I have a cat."], answer: 1, img: "img/q2.jpg" },
+      { q: "What color is the sun?", options: ["Blue", "Green", "Yellow", "Black"], answer: 2, img: "img/q3.jpg" },
+      { q: "Choose the correct sentence.", options: ["He can plays piano.", "She go to school.", "They is happy.", "We are friends."], answer: 3, img: "img/q4.jpg" },
+      { q: "What is this?", options: ["It’s a cat.", "It’s a fish.", "It’s a dog.", "It’s a bird."], answer: 2, img: "img/q5.jpg" },
+      { q: "Where do you live?", options: ["I live in a city.", "I am a student.", "I like ice cream.", "I have a car."], answer: 0, img: "img/q6.jpg" },
+      { q: "What do you like to do?", options: ["I like swimming.", "I am 15 years old.", "I have a book.", "I go to school."], answer: 0, img: "img/q7.jpg" },
+      { q: "What is your favorite color?", options: ["My favorite color is blue.", "I am happy.", "I like pizza.", "I have a dog."], answer: 0, img: "img/q8.jpg" },
+      { q: "What time is it?", options: ["It is 5 o'clock.", "I am tired.", "I like to dance.", "I have a bike."], answer: 0, img: "img/q9.jpg" },
+      { q: "How many brothers or sisters do you have?", options: ["I have two sisters.", "I am a teacher.", "I like to run.", "I have a cat."], answer: 0, img: "img/q10.jpg" },
+      { q: "What do you want to be?", options: ["I want to be a doctor.", "I am sad.", "I like to read.", "I have a job."], answer: 0, img: "img/q11.jpg" },
+      { q: "What do you eat for breakfast?", options: ["I eat bread and cheese.", "I am tall.", "I like music.", "I have a friend."], answer: 0, img: "img/q12.jpg" },
+      { q: "What is your favorite animal?", options: ["My favorite animal is a dog.", "I am learning English.", "I like to play.", "I have a cat."], answer: 0, img: "img/q13.jpg" },
+      { q: "How do you get to school?", options: ["I walk to school.", "I am tired.", "I have a bike.", "I like to swim."], answer: 0, img: "img/q14.jpg" },
+      { q: "What do you do after school?", options: ["I play with my friends.", "I am happy.", "I like to watch TV.", "I have homework."], answer: 0, img: "img/q15.jpg" },
+      { q: "What is your hobby?", options: ["My hobby is painting.", "I am a student.", "I like to eat.", "I have a dog."], answer: 0, img: "img/q16.jpg" },
+      { q: "What is your favorite food?", options: ["My favorite food is pizza.", "I am 12 years old.", "I like to sing.", "I have a book."], answer: 0, img: "img/q17.jpg" },
+      { q: "What do you do on weekends?", options: ["I go to the park.", "I am learning.", "I like to play.", "I have a car."], answer: 0, img: "img/q18.jpg" },
+      { q: "What is the weather like?", options: ["It is sunny.", "I am tired.", "I like to sleep.", "I have a cat."], answer: 0, img: "img/q19.jpg" },
+      { q: "What is your favorite season?", options: ["My favorite season is summer.", "I am happy.", "I like to read.", "I have a bike."], answer: 0, img: "img/q20.jpg" },
+      { q: "What is your dream?", options: ["My dream is to travel.", "I am 10 years old.", "I like to draw.", "I have a friend."], answer: 0, img: "img/q21.jpg" }
+    ];
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      studentName.textContent = form.name.value;
+      studentGrade.textContent = form.grade.value;
+      studentParent.textContent = form.parent.value;
+      studentPhone.textContent = form.phone.value;
+      form.style.display = 'none';
+      quiz.style.display = 'flex';
+      showQuestion();
+    });
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      questionText.textContent = `${currentQuestion + 1}. ${q.q}`;
+      questionImage.src = q.img;
+      optionsDiv.innerHTML = '';
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => selectAnswer(idx);
+        optionsDiv.appendChild(btn);
+      });
+      nextBtn.disabled = true;
+    }
+
+    function selectAnswer(index) {
+      Array.from(optionsDiv.children).forEach((btn, idx) => {
+        btn.classList.remove('selected');
+        if (index === idx) {
+          btn.classList.add('selected');
+        }
+      });
+      if (index === questions[currentQuestion].answer) score++;
+      nextBtn.disabled = false;
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        quiz.style.display = 'none';
+        result.style.display = 'block';
+        reportCard.style.display = 'block';
+        const level = score <= 7 ? 'Pre-A1' : score <= 13 ? 'A1 Beginner' : score <= 18 ? 'Strong A1' : 'A2 Elementary';
+        resultText.textContent = `Toplam ${questions.length} sorudan ${score} doğru yaptınız.`;
+        resultLevel.textContent = `İngilizce Seviyeniz: ${level}`;
+        scoreCount.textContent = score;
+        studentLevel.textContent = level;
+      }
+    }
+  </script>
+</body>
+</html>
