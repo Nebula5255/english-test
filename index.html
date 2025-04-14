@@ -3,161 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thames İngilizce Seviye Testi</title>
+  <title>ÜSTÜN BAŞARI AKADEMİSİ - Thames English Academy | İngilizce Seviye Testi</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #eef5fc;
+      background: #f0f5ff;
       font-family: 'Segoe UI', sans-serif;
     }
+    
     .card {
-      max-width: 500px;
-      margin: 5vh auto;
-      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      margin: 20px auto;
+      padding: 30px;
       background: white;
       border-radius: 16px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      text-align: center;
     }
-    h1 {
-      font-size: 1.8rem;
-      color: #1a73e8;
-      margin-bottom: 0.5rem;
-    }
-    .emoji {
-      font-size: 2.5rem;
-    }
-    form, .quiz, .result {
+    
+    /* Logo düzeni */
+    .logo-container {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .logo-container img {
+      max-height: 80px;
+      max-width: 40%;
+      object-fit: contain;
+    }
+    
+    /* Başlık */
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #000;
+      margin-bottom: 2rem;
+    }
+    
+    /* Form stilleri */
+    form {
+      display: grid;
+      grid-template-columns: auto 1fr;
       gap: 1rem;
-      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
     }
-    .quiz {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-      border-radius: 12px;
-    }
-    .question {
+    
+    form label {
       font-weight: bold;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
     }
-    label {
-      font-weight: 600;
-      text-align: left;
-      color: #333;
-    }
-    input {
+    
+    form input {
       padding: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
     }
+    
+    /* Button grid */
+    .button-container {
+      grid-column: span 2;
+      text-align: right;
+    }
+    
     button {
-      margin-top: 1rem;
-      padding: 0.9rem;
+      padding: 0.75rem 1.5rem;
       background: #1c87e6;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s ease;
     }
+    
     button:hover {
       background: #155ac1;
     }
-    .options button {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 0.75rem;
-      font-size: 1.1rem;
-      background: #f0f8ff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      color: #333;
+    
+    /* Soru alanı */
+    .quiz {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
     }
+    
+    .question {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .options button {
+      text-align: left;
+      padding: 0.75rem;
+      background: #f0f8ff;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+    
     .options button:hover {
       background: #c4daff;
     }
+    
     .options button.selected {
       background: #4caf50;
       color: white;
     }
+    
+    /* Sonuç sayfası */
     .result {
       display: none;
+    }
+    
+    .result h2 {
+      font-size: 1.8rem;
       text-align: center;
-      padding-top: 1rem;
+      color: #000;
+      margin: 1.5rem 0;
     }
-    .report-card {
-      margin-top: 2rem;
+    
+    /* Sertifika bilgileri */
+    .certificate {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
       padding: 1rem;
-      background: #e0f7fa;
+      background: #f6f6f6;
       border-radius: 8px;
-      color: #00796b;
-      font-weight: bold;
     }
-    #questionImage {
-      width: 100%;  /* Görselin genişliği ekranın genişliğine sığacak şekilde ayarlanır */
-      max-width: 200px;  /* Genişlik sınırı eklenir */
-      height: auto;  /* Yükseklik orantılı olarak ayarlanır */
-      margin-bottom: 1rem;  /* Alt boşluk */
+    
+    .certificate-label {
+      font-weight: bold;
+      color: #555;
+    }
+    
+    /* Sonuç Rapor Bölümleri */
+    .result-section {
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+    
+    .section-title {
+      font-size: 1.3rem;
+      color: #1c87e6;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+    
+    /* Yazdır butonu */
+    .print-button {
+      margin-top: 1.5rem;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="emoji">✅</div>
-    <h1>Thames İngilizce Seviye Tespit Testi</h1>
-
-    <form id="registerForm">
-      <label for="name">Ad Soyad</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="grade">Sınıf</label>
-      <input type="text" id="grade" name="grade" required>
-
-      <label for="parent">Veli Adı</label>
-      <input type="text" id="parent" name="parent" required>
-
-      <label for="phone">Telefon</label>
-      <input type="text" id="phone" name="phone" required>
-
-      <button type="submit">Teste Başla ➤</button>
-    </form>
-
-    <div class="quiz" id="quiz" style="display:none;">
+    <!-- Başlangıç ekranı - Logolar sadece burada -->
+    <div id="startScreen">
+      <div class="logo-container">
+        <img src="img/ustun_basari_logo.png" alt="ÜSTÜN BAŞARI AKADEMİSİ">
+        <img src="img/thames_logo.png" alt="Thames English Academy">
+      </div>
+      
+      <h1>İngilizce Seviye Tespit Testi</h1>
+      
+      <!-- Form -->
+      <form id="registerForm">
+        <label for="name">Ad Soyad</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="grade">Sınıf</label>
+        <input type="text" id="grade" name="grade" required>
+        
+        <label for="parent">Veli Adı</label>
+        <input type="text" id="parent" name="parent" required>
+        
+        <label for="phone">Telefon</label>
+        <input type="text" id="phone" name="phone" required>
+        
+        <div class="button-container">
+          <button type="submit">Teste Başla ➤</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Quiz alanı -->
+    <div class="quiz" id="quiz">
       <p class="question" id="questionText"></p>
-      <img id="questionImage" src="" alt="Question Image" style="max-width: 100%; margin-bottom: 1rem;">
       <div class="options" id="options"></div>
       <button id="nextBtn" onclick="nextQuestion()" disabled>Sonraki Soru</button>
     </div>
-
+    
+    <!-- Sonuç alanı - Logolar sadece burada -->
     <div class="result" id="result">
-      <h2>🎉 Test Tamamlandı</h2>
-      <p id="resultText"></p>
-      <p id="resultLevel"></p>
-      <button onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button>
-    </div>
-
-    <div class="report-card" id="reportCard" style="display:none;">
-      <p><strong>Ad Soyad:</strong> <span id="studentName"></span></p>
-      <p><strong>Sınıf:</strong> <span id="studentGrade"></span></p>
-      <p><strong>Veli Adı:</strong> <span id="studentParent"></span></p>
-      <p><strong>Telefon:</strong> <span id="studentPhone"></span></p>
-      <p><strong>Doğru Sayısı:</strong> <span id="scoreCount"></span></p>
-      <p><strong>Seviye:</strong> <span id="studentLevel"></span></p>
+      <div class="logo-container">
+        <img src="img/ustun_basari_logo.png" alt="ÜSTÜN BAŞARI AKADEMİSİ">
+        <img src="img/thames_logo.png" alt="Thames English Academy">
+      </div>
+      
+      <h2>İNGİLİZCE SEVİYE TESPİT RAPORU</h2>
+      
+      <!-- Öğrenci bilgileri -->
+      <div class="certificate">
+        <div>
+          <div class="certificate-label">Ad Soyad:</div>
+          <div id="studentName"></div>
+        </div>
+        <div>
+          <div class="certificate-label">Sınıf:</div>
+          <div id="studentGrade"></div>
+        </div>
+        <div>
+          <div class="certificate-label">Veli Adı:</div>
+          <div id="studentParent"></div>
+        </div>
+        <div>
+          <div class="certificate-label">Telefon:</div>
+          <div id="studentPhone"></div>
+        </div>
+        <div>
+          <div class="certificate-label">Test Tarihi:</div>
+          <div id="testDate"></div>
+        </div>
+        <div>
+          <div class="certificate-label">Sonuç:</div>
+          <div id="scoreCount"></div>
+        </div>
+      </div>
+      
+      <!-- Rapor bölümleri -->
+      <div class="result-section">
+        <h3 class="section-title">Genel Performans ve Seviye</h3>
+        <p id="resultText"></p>
+        <p id="resultLevel"></p>
+      </div>
+      
+      <div class="result-section">
+        <h3 class="section-title">Tavsiyeler</h3>
+        <p id="recommendation"></p>
+      </div>
+      
+      <div class="print-button">
+        <button onclick="window.print()">🖨️ Raporu Yazdır</button>
+      </div>
     </div>
   </div>
 
   <script>
+    // DOM Elementleri
     const form = document.getElementById('registerForm');
+    const startScreen = document.getElementById('startScreen');
     const quiz = document.getElementById('quiz');
     const result = document.getElementById('result');
     const questionText = document.getElementById('questionText');
@@ -165,56 +278,68 @@
     const nextBtn = document.getElementById('nextBtn');
     const resultText = document.getElementById('resultText');
     const resultLevel = document.getElementById('resultLevel');
-    const reportCard = document.getElementById('reportCard');
     const studentName = document.getElementById('studentName');
     const studentGrade = document.getElementById('studentGrade');
     const studentParent = document.getElementById('studentParent');
     const studentPhone = document.getElementById('studentPhone');
     const scoreCount = document.getElementById('scoreCount');
-    const studentLevel = document.getElementById('studentLevel');
-
+    const testDate = document.getElementById('testDate');
+    
+    // Test takibi
     let currentQuestion = 0;
     let score = 0;
-
+    
+    // Soru listesi
     const questions = [
-      { q: "What’s your name?", options: ["I’m fine.", "I’m 10.", "My name is Emily.", "I live in a house."], answer: 2, img: "img/q1.png" },
-      { q: "How old are you?", options: ["I am in the kitchen.", "I am twelve years old.", "I like football.", "I have a cat."], answer: 1, img: "img/q2.png" },
-      { q: "What color is the sun?", options: ["Blue", "Green", "Yellow", "Black"], answer: 2, img: "img/q3.png" },
-      { q: "Choose the correct sentence.", options: ["He can plays piano.", "She go to school.", "They is happy.", "We are friends."], answer: 3, img: "img/q4.png" },
-      { q: "What is this?", options: ["It’s a cat.", "It’s a fish.", "It’s a dog.", "It’s a bird."], answer: 3, img: "img/q5.png" },
-      { q: "Where do you live?", options: ["I live in a city.", "I am a student.", "I like ice cream.", "I have a car."], answer: 0, img: "img/q6.png" },
-      { q: "What do you like to do?", options: ["I like swimming.", "I am 15 years old.", "I have a book.", "I go to school."], answer: 2, img: "img/q7.jpg" },
-      { q: "What is your favorite color?", options: ["My favorite color is blue.", "I am happy.", "I like pizza.", "I have a dog."], answer: 1, img: "img/q8.jpg" },
-      { q: "What time is it?", options: ["It is 5 o'clock.", "I am tired.", "I like to dance.", "I have a bike."], answer: 3, img: "img/q9.jpg" },
-      { q: "How many brothers or sisters do you have?", options: ["I have two sisters.", "I am a teacher.", "I like to run.", "I have a cat."], answer: 1, img: "img/q10.jpg" },
-      { q: "What do you want to be?", options: ["I want to be a doctor.", "I am sad.", "I like to read.", "I have a job."], answer: 2, img: "img/q11.jpg" },
-      { q: "What do you eat for breakfast?", options: ["I eat bread and cheese.", "I am tall.", "I like music.", "I have a friend."], answer: 3, img: "img/q12.jpg" },
-      { q: "What is your favorite animal?", options: ["My favorite animal is a dog.", "I am learning English.", "I like to play.", "I have a cat."], answer: 0, img: "img/q13.jpg" },
-      { q: "How do you get to school?", options: ["I walk to school.", "I am tired.", "I have a bike.", "I like to swim."], answer: 2, img: "img/q14.jpg" },
-      { q: "What do you do after school?", options: ["I play with my friends.", "I am happy.", "I like to watch TV.", "I have homework."], answer: 1, img: "img/q15.jpg" },
-      { q: "What is your hobby?", options: ["My hobby is painting.", "I am a student.", "I like to eat.", "I have a dog."], answer: 3, img: "img/q16.jpg" },
-      { q: "What is your favorite food?", options: ["My favorite food is pizza.", "I am 12 years old.", "I like to sing.", "I have a book."], answer: 0, img: "img/q17.jpg" },
-      { q: "What do you do on weekends?", options: ["I go to the park.", "I am learning.", "I like to play.", "I have a car."], answer: 3, img: "img/q18.jpg" },
-      { q: "What is the weather like?", options: ["It is sunny.", "I am tired.", "I like to sleep.", "I have a cat."], answer: 2, img: "img/q19.jpg" },
-      { q: "What is your favorite season?", options: ["My favorite season is summer.", "I am happy.", "I like to read.", "I have a bike."], answer: 0, img: "img/q20.jpg" },
-      { q: "What is your dream?", options: ["My dream is to travel.", "I am 10 years old.", "I like to draw.", "I have a friend."], answer: 3, img: "img/q21.jpg" }
+      { q: "What is your name?", options: ["I am fine.", "My name is John.", "I am 10 years old.", "I live in a house."], answer: 1 },
+      { q: "How old are you?", options: ["I am 5 years old.", "I like football.", "I am tall.", "I live in a house."], answer: 0 },
+      { q: "What color is the sky?", options: ["Green", "Blue", "Red", "Black"], answer: 1 },
+      { q: "Which sentence is correct?", options: ["She is plays football.", "I can sings.", "They are studying.", "He can to swim."], answer: 2 },
+      { q: "Where do you live?", options: ["I live in a city.", "I live in a table.", "I live in a pencil.", "I live in a shoe."], answer: 0 },
+      { q: "What is your favorite color?", options: ["My favorite color is red.", "I like eating pizza.", "I like swimming.", "My favorite color is rainy."], answer: 0 },
+      { q: "How do you get to school?", options: ["I go by bus.", "I am 5 years old.", "I go to the library.", "I sleep."], answer: 0 },
+      { q: "What time is it?", options: ["It's 5 o'clock.", "It's Tuesday.", "It's a dog.", "It's sunny."], answer: 0 },
+      { q: "What is your favorite animal?", options: ["I like pizza.", "My favorite animal is a dog.", "I am playing.", "I go to school."], answer: 1 },
+      { q: "What do you like to do?", options: ["I like playing games.", "I sleep.", "I have a cat.", "I am a teacher."], answer: 0 },
+      { q: "What do you eat for lunch?", options: ["I eat bread and cheese.", "I am reading a book.", "I like bananas.", "I go to the park."], answer: 0 },
+      { q: "What do you want to be when you grow up?", options: ["I want to be a teacher.", "I am a doctor.", "I like reading books.", "I want to be a tree."], answer: 0 },
+      { q: "Where is the sun?", options: ["It is in the sky.", "It is on the table.", "It is under the bed.", "It is in the car."], answer: 0 },
+      { q: "Which of these is a fruit?", options: ["Apple", "Table", "Chair", "Pencil"], answer: 0 },
+      { q: "How do you feel today?", options: ["I am happy.", "I am a teacher.", "I am cooking.", "I am busy."], answer: 0 },
+      { q: "How many legs does a dog have?", options: ["Two", "Four", "Six", "Three"], answer: 1 },
+      { q: "Which of these is a vegetable?", options: ["Carrot", "Banana", "Cheese", "Book"], answer: 0 },
+      { q: "What is the opposite of 'hot'?", options: ["Cold", "Warm", "Sweet", "Fast"], answer: 0 },
+      { q: "Which one is a school subject?", options: ["Math", "Dog", "Apple", "Table"], answer: 0 },
+      { q: "What color are apples?", options: ["Green or Red", "Blue", "Yellow", "Black"], answer: 0 }
     ];
-
+    
+    // Form gönderildiğinde
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Form bilgilerini kaydet
       studentName.textContent = form.name.value;
       studentGrade.textContent = form.grade.value;
       studentParent.textContent = form.parent.value;
       studentPhone.textContent = form.phone.value;
-      form.style.display = 'none';
+      
+      // Test tarihini ayarla
+      const today = new Date();
+      testDate.textContent = today.toLocaleDateString('tr-TR');
+      
+      // Formu gizle, testi göster
+      startScreen.style.display = 'none';
       quiz.style.display = 'flex';
+      
+      // İlk soruyu göster
       showQuestion();
     });
-
+    
+    // Soru gösterme
     function showQuestion() {
       const q = questions[currentQuestion];
       questionText.textContent = `${currentQuestion + 1}. ${q.q}`;
-      questionImage.src = q.img;
+      
       optionsDiv.innerHTML = '';
       q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
@@ -222,9 +347,11 @@
         btn.onclick = () => selectAnswer(idx);
         optionsDiv.appendChild(btn);
       });
+      
       nextBtn.disabled = true;
     }
-
+    
+    // Cevap seçme
     function selectAnswer(index) {
       Array.from(optionsDiv.children).forEach((btn, idx) => {
         btn.classList.remove('selected');
@@ -232,25 +359,56 @@
           btn.classList.add('selected');
         }
       });
-      if (index === questions[currentQuestion].answer) score++;
+      
+      // Doğru cevap ise skoru arttır
+      if (index === questions[currentQuestion].answer) {
+        score++;
+      }
+      
       nextBtn.disabled = false;
     }
-
+    
+    // Sonraki soruya geç
     function nextQuestion() {
       currentQuestion++;
       if (currentQuestion < questions.length) {
         showQuestion();
       } else {
-        quiz.style.display = 'none';
-        result.style.display = 'block';
-        reportCard.style.display = 'block';
-        const level = score <= 7 ? 'Pre-A1' : score <= 13 ? 'A1 Beginner' : score <= 18 ? 'Strong A1' : 'A2 Elementary';
-        resultText.textContent = `Toplam ${questions.length} sorudan ${score} doğru yaptınız.`;
-        resultLevel.textContent = `İngilizce Seviyeniz: ${level}`;
-        scoreCount.textContent = score;
-        studentLevel.textContent = level;
+        finishTest();
+      }
+    }
+    
+    // Testi bitir
+    function finishTest() {
+      quiz.style.display = 'none';
+      result.style.display = 'block';
+      
+      // Seviye belirle
+      const level = score <= 7 ? 'Pre-A1' : score <= 13 ? 'A1 Beginner' : score <= 18 ? 'Strong A1' : 'A2 Elementary';
+      
+      // Sonuçları göster
+      resultText.textContent = `Toplam ${questions.length} sorudan ${score} doğru yaptınız.`;
+      resultLevel.textContent = `İngilizce Seviyeniz: ${level}`;
+      scoreCount.textContent = `${score}/${questions.length}`;
+      
+      // Tavsiye metni
+      updateRecommendation(level);
+    }
+    
+    // Tavsiye metni
+    function updateRecommendation(level) {
+      const recommendation = document.getElementById('recommendation');
+      
+      if (level === 'Pre-A1') {
+        recommendation.textContent = 'ÜSTÜN BAŞARI AKADEMİSİ ve Thames English Academy işbirliğinde sunduğumuz "Thames Kids" (7-14 yaş grubu) Başlangıç kurslarımız sizin için ideal olacaktır. Temel İngilizce becerilerini geliştirmek için özel tasarlanmış programımız ile hızlı ilerleme kaydedeceksiniz.';
+      } else if (level === 'A1 Beginner') {
+        recommendation.textContent = 'ÜSTÜN BAŞARI AKADEMİSİ ve Thames English Academy işbirliğinde sunduğumuz "Thames Kids" (7-14 yaş grubu) A1 seviye kurslarımızda dil becerilerinizi geliştirmeye devam edebilirsiniz. Konuşma ve anlama becerilerinizi güçlendirmeye odaklanan derslerimiz size yardımcı olacaktır.';
+      } else if (level === 'Strong A1') {
+        recommendation.textContent = 'ÜSTÜN BAŞARI AKADEMİSİ ve Thames English Academy işbirliğinde sunduğumuz "Thames Kids" (7-14 yaş grubu) A1+ seviye kurslarımız, mevcut becerilerinizi pekiştirmeniz ve A2 seviyesine hazırlanmanız için idealdir. İleri düzey iletişim becerilerini geliştirmeye odaklanacaksınız.';
+      } else {
+        recommendation.textContent = 'ÜSTÜN BAŞARI AKADEMİSİ ve Thames English Academy işbirliğinde sunduğumuz "Thames Kids" (7-14 yaş grubu) A2 seviye kurslarımız, daha karmaşık İngilizce yapılarını öğrenmenize ve akıcı konuşma becerilerinizi geliştirmenize yardımcı olacaktır. Uluslararası sınavlara hazırlık için de ideal bir seviyedesiniz.';
       }
     }
   </script>
 </body>
-</html>
+</html> 
