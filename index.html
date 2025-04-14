@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="İngilizce Seviye Tespit Testi - ÜSTÜN BAŞARI AKADEMİSİ ve Thames English Academy"/>
+  <meta name="author" content="ÜSTÜN BAŞARI AKADEMİSİ ve Thames English Academy"/>
   <title>ÜSTÜN BAŞARI AKADEMİSİ - Thames English Academy | İngilizce Seviye Testi</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background: #f0f5ff;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
     .card {
@@ -172,6 +174,22 @@
       margin-top: 1.5rem;
       text-align: center;
     }
+    
+    /* Duyarlı tasarım */
+    @media (max-width: 600px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+      
+      .button-container {
+        grid-column: 1;
+        text-align: center;
+      }
+      
+      .certificate {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -179,8 +197,8 @@
     <!-- Başlangıç ekranı - Logolar sadece burada -->
     <div id="startScreen">
       <div class="logo-container">
-        <img src="img/ustun_basari_logo.png" alt="ÜSTÜN BAŞARI AKADEMİSİ">
-        <img src="img/thames_logo.png" alt="Thames English Academy">
+        <img src="./img/ustun_basari_logo.png" alt="ÜSTÜN BAŞARI AKADEMİSİ">
+        <img src="./img/thames_logo.png" alt="Thames English Academy">
       </div>
       
       <h1>İngilizce Seviye Tespit Testi</h1>
@@ -215,8 +233,8 @@
     <!-- Sonuç alanı - Logolar sadece burada -->
     <div class="result" id="result">
       <div class="logo-container">
-        <img src="img/ustun_basari_logo.png" alt="ÜSTÜN BAŞARI AKADEMİSİ">
-        <img src="img/thames_logo.png" alt="Thames English Academy">
+        <img src="./img/ustun_basari_logo.png" alt="ÜSTÜN BAŞARI AKADEMİSİ">
+        <img src="./img/thames_logo.png" alt="Thames English Academy">
       </div>
       
       <h2>İNGİLİZCE SEVİYE TESPİT RAPORU</h2>
